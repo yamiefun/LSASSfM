@@ -1,18 +1,11 @@
-# Graph Structure from Motion (GraphSfM)
-[![Join the chat at https://gitter.im/hlzz/libvot](https://badges.gitter.im/hlzz/libvot.svg)](https://gitter.im/GraphSfM/Lobby)
-![issues](https://img.shields.io/github/issues/AIBluefisher/GraphSfM.svg)
-![forks](https://img.shields.io/github/forks/AIBluefisher/GraphSfM.svg)
-![stars](https://img.shields.io/github/stars/AIBluefisher/GraphSfM.svg)
-![license](https://img.shields.io/github/license/AIBluefisher/GraphSfM.svg)
+# Large Scale Ambiguous Scene Structure from Motion (LSASSfM)
 
-[中文简介](./docs/README_ch.md)
+*This work is developed based on [DAGSfM](https://github.com/yamiefun/DAGSfM) and [COLMAP](https://github.com/colmap/colmap).*
 
-**A similar version of GraphSfM based on [OpenMVG](https://github.com/openMVG/openMVG) has been released in: https://github.com/AIBluefisher/EGSfM.**
+## 1. Overview of LSASSfM
+In recent years, 3D reconstruction methods have been used in many different fields, for example, augmented reality, autonomous navigation, etc. The most famous algorithm is structure-from-motion (SfM). SfM takes 2D images in different view point in the scene as input, extracts feature points in images, and figure out position of those points and camera poses in 3D space. Although SfM method has been widely used, it often fails to reconstruct ambiguous or repeated structures due to large amount of false feature matching. [Cui et al. 2020] claimed that the image which has the largest number of feature matching is most likely the correct matched image, and used this theory to filter out more outliers, made their method more robust against repeated structures. [Su et al. 2020] is the first work that introduced additional inertial measurement unit (IMU) information and successfully reconstruct ambiguous scenes. However, their method is still unable to work well on large-scale indoor scene, which is still a big challenge due to the severely ambiguous and inefficient problem.
 
-## 1. Overview of GraphSfM
-Our Structure from Motion approach, named **`Graph Structure from Motion (GraphSfM)`**, is aimed at large scale 3D reconstruction. Besides, we aimed at exploring the computation ability of computer and making SfM easily transferred to distributed system. This work has been reconstructed and now it is based on [COLMAP](https://github.com/colmap/colmap).
-
-In our work, 3D reconstruction is deemed as a ```divide-and-conquer``` problem. Our graph cluster algorithm divides images into different clusters, while images with high relativity remained in the same group. After the completion of local SfM in all clusters, an elaborate graph initialization and MST construction algorithm is designed to accurately merge clusters, and cope well with drift problems. The two proposed graph-based algorithms make SfM more efficient and robust - the graph cluster algorithm accelerate the SfM step while guarantee the robustness of clusters merging, and the MST construction makes point clouds alignment as accurate as possible. Our approach can reconstruct large scale data-set in one single machine with very high accuracy and efficiency.
+To resolve the problem mentioned above, we propose a method to reconstruct large-scale indoor scene by building a correct view graph with the help of some additional information. The experiments show that our method can successfully reconstruct largescale scenes with highly ambiguous and repeated structures.
 
 If you use this project for your research, please cite:
 ```
@@ -73,10 +66,10 @@ make
 sudo make install
 ```
 
-Build our GraphSfM
+Build our LSASSfM
 ```sh
-git clone https://github.com/AIBluefisher/GraphSfM.git
-cd GraphSfM
+git clone https://github.com/yamiefun/LSASSfM.git
+cd LSASSfM
 mkdir build
 cd build
 cmake ..
@@ -85,57 +78,39 @@ sudo make install
 ```
 
 ## 3. Usage
-
-As our algorithm is not integrated in the `GUI` of `COLMAP`, we offer a script to run the 
-distributed SfM (We hope there is anyone that is interested in integrating this pipeline into the GUI):
-```sh
-sudo chmod +x scripts/shell/distributed_sfm.sh
-./distributed_sfm.sh $image_dir $num_images_ub $log_folder $completeness_ratio
-```
-- ```$image_dir```:   The directory that stores images
-- ```$num_images_ub```: The maximum image number in each cluster. For example, ```80~120```.
-- ```$log_folder```:  The directory that stores the logs
-- ```$completeness_ratio```: The ratio that measure the repeatitive rate of adjacent clusters.
-
-If succeed, camera poses and sparse points should be included in `$DATASET/sparse` folder, you can use COLMAP's GUI to 
-import it and show the visual result:
-```sh
-./build/src/exe/colmap gui
-```
-For small scale reconstruction, you can set the `$num_images_ub` equal to the number of images, the program would just use the incremental SfM pipeline of [COLMAP](https://github.com/colmap/colmap).
-
-For large scale reconstruction, our `GraphSfM` is highly recommended, these parameters should be tuned carefully: larger `$num_images_ub` and `$completeness_ratio` can make reconstruction more robust, but also may lead to low efficiency and even degenerate to incremental one.
+TODO
 
 ## Licence
 
 ```
-BSD 3-Clause License
-
-Copyright (c) 2018, 陈煜
+Copyright (c) 2022, Chia-Hung Yu.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above copyright notice, this
-  list of conditions and the following disclaimer.
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above copyright notice,
-  this list of conditions and the following disclaimer in the documentation
-  and/or other materials provided with the distribution.
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
 
-* Neither the name of the copyright holder nor the names of its
-  contributors may be used to endorse or promote products derived from
-  this software without specific prior written permission.
+    * Neither the name of ETH Zurich and UNC Chapel Hill nor the names of
+      its contributors may be used to endorse or promote products derived
+      from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
 AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+Author: Chia-Hung Yu
 ```
