@@ -1,6 +1,6 @@
 # Large Scale Ambiguous Scene Structure from Motion (LSASSfM)
 
-*This work is developed based on [DAGSfM](https://github.com/yamiefun/DAGSfM) and [COLMAP](https://github.com/colmap/colmap).*
+*This work is developed based on [DAGSfM](https://github.com/AIBluefisher/DAGSfM) and [COLMAP](https://github.com/colmap/colmap).*
 
 ## 1. Overview of LSASSfM
 In recent years, 3D reconstruction methods have been used in many different fields, for example, augmented reality, autonomous navigation, etc. The most famous algorithm is structure-from-motion (SfM). SfM takes 2D images in different view point in the scene as input, extracts feature points in images, and figure out position of those points and camera poses in 3D space. Although SfM method has been widely used, it often fails to reconstruct ambiguous or repeated structures due to large amount of false feature matching. [Cui et al. 2020] claimed that the image which has the largest number of feature matching is most likely the correct matched image, and used this theory to filter out more outliers, made their method more robust against repeated structures. [Su et al. 2020] is the first work that introduced additional inertial measurement unit (IMU) information and successfully reconstruct ambiguous scenes. However, their method is still unable to work well on large-scale indoor scene, which is still a big challenge due to the severely ambiguous and inefficient problem.
