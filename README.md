@@ -53,7 +53,7 @@ sudo apt-get install \
     libcgal-qt5-dev
 ```
 
-Then install [ceres-solver]()
+Then install [ceres-solver](http://ceres-solver.org/)
 ```sh
 sudo apt-get install libatlas-base-dev libsuitesparse-dev
 git clone https://ceres-solver.googlesource.com/ceres-solver
@@ -83,7 +83,7 @@ TODO
 ## Licence
 
 ```
-Copyright (c) 2022, Chia-Hung Yu.
+Copyright (c) 2022, Henry Yu.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -112,5 +112,5 @@ CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 
-Author: Chia-Hung Yu
+Author: Henry Yu (yamiefun@gmail.com)
 ```
