@@ -66,6 +66,15 @@ make
 sudo make install
 ```
 
+Install GTest
+```
+sudo apt-get install libgtest-dev
+cd /usr/src/gtest
+sudo cmake CMakeLists.txt
+sudo make
+sudo cp *.a /usr/lib
+```
+
 Build our LSASSfM
 ```sh
 git clone https://github.com/yamiefun/LSASSfM.git
