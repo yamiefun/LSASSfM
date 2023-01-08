@@ -9,6 +9,21 @@ To resolve the problem mentioned above, we propose a method to reconstruct large
 
 If you use this project for your research, please cite:
 ```
+@inproceedings{10.1145/3550082.3564199,
+    author = {Yu, Chia Hung and Chen, Kuan Wen},
+    title = {Robust and Efficient Structure-from-Motion Method for Ambiguous Large-Scale Indoor Scene},
+    year = {2022},
+    isbn = {9781450394628},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3550082.3564199},
+    doi = {10.1145/3550082.3564199},
+    booktitle = {SIGGRAPH Asia 2022 Posters},
+    articleno = {25},
+    numpages = {2},
+    location = {Daegu, Republic of Korea},
+    series = {SA '22}
+}
 @misc{chen2019graphbased,
     title={Graph-Based Parallel Large Scale Structure from Motion},
     author={Yu Chen and Shuhan Shen and Yisong Chen and Guoping Wang},
